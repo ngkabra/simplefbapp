@@ -17,37 +17,4 @@
 Regular content goes here
 {% endblock %}
 
-
-
-{% block debuginfo %}
-
-{% if True %}
-Debugging information. To turn this off, edit templates/fb_base.html and change <code>if True</code> to <code>if False</code>.
-
-<p>
-Request.GET values are:<ul>
-{% for k,v in request.GET.items %}
-  <li>{{k}}: {{v}}</li>
-{% endfor %}
-</ul>
-
-Request.POST values are:<ul>
-{% for k,v in request.POST.items %}
-  <li>{{k}}: {{v}}</li>
-{% endfor %}
-</ul>
-
-Cookies are:<ul>
-{% for k,v in request.COOKIES.items %}
-  <li>{{k}}: {{v}}</li>
-{% endfor %}
-</ul>
-
-Django session data is:<ul>
-{% for k,v in request.session.items %}
-  <li>{{k}}: {{v}}</li>
-{% endfor %}
-</ul>
-{% endif %}
-
-{% endblock %}
+{% include "simplefbapp/debug.html" %}
