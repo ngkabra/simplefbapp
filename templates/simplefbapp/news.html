@@ -1,0 +1,9 @@
+{% extends "simplefbapp/base.html" %}
+{% block content %}
+<p>News updates for you are:</p>
+<ul>
+{% for n in news.data|slice:"5" %}
+  <li>From {{n.from.name}}: {{n.message}}</li>
+{% endfor %}
+</ul>
+{% endblock %}

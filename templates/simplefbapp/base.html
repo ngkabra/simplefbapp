@@ -1,0 +1,53 @@
+{% block messages %}
+<p>{{message}}</p>
+{% endblock %}
+
+{% block navigation %}
+    {% comment %}
+      Sorry for hardcoding these urls. The "correct" way of doing this in a non-hardcoded way is beyond the scope of this "simple" tutorial.
+    {% endcomment %}
+
+  <p><a href="{{APP_CANVAS_PAGE}}" target="_top">Home</a>|
+     <a href="{{APP_CANVAS_PAGE}}news/" target="_top">News</a>|
+     <a href="{{APP_CANVAS_PAGE}}friends/" target="_top">Friends</a></p>
+{% endblock %}
+
+{% block content %}
+
+Regular content goes here
+{% endblock %}
+
+
+
+{% block debuginfo %}
+
+{% if True %}
+Debugging information. To turn this off, edit templates/fb_base.html and change <code>if True</code> to <code>if False</code>.
+
+<p>
+Request.GET values are:<ul>
+{% for k,v in request.GET.items %}
+  <li>{{k}}: {{v}}</li>
+{% endfor %}
+</ul>
+
+Request.POST values are:<ul>
+{% for k,v in request.POST.items %}
+  <li>{{k}}: {{v}}</li>
+{% endfor %}
+</ul>
+
+Cookies are:<ul>
+{% for k,v in request.COOKIES.items %}
+  <li>{{k}}: {{v}}</li>
+{% endfor %}
+</ul>
+
+Django session data is:<ul>
+{% for k,v in request.session.items %}
+  <li>{{k}}: {{v}}</li>
+{% endfor %}
+</ul>
+{% endif %}
+
+{% endblock %}

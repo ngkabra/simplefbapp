@@ -1,0 +1,9 @@
+{% extends "simplefbapp/base.html" %}
+{% block content %}
+<p>Your friends are:</p>
+<ul>
+{% for f in friends.data %}
+  <li>{{f.name}}</li>
+{% endfor %}
+</ul>
+{% endblock %}
