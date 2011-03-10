@@ -3,11 +3,14 @@ This is a simple facebook app built using python (and without using any javascri
 This app depends upon [simpleoauth](https://github.com/ngkabra/simpleoauth) and [my fork of python-oauth2](https://github.com/ngkabra/python-oauth2). To use this do the following:
 
 - Check out [ngkabra/python-oauth2](https://github.com/ngkabra/python-oauth2) by doing the following:
-    git clone git@github.com:ngkabra/python-oauth2.git
+
+        git clone git@github.com:ngkabra/python-oauth2.git
 - Check out [simpleoauth](https://github.com/ngkabra/simpleoauth)
-    git clone git@github.com:ngkabra/simpleoauth.git
+
+        git clone git@github.com:ngkabra/simpleoauth.git
 - Check out [simplefbapp](https://github.com/ngkabra/simplefbapp)
-    git clone git@github.com:ngkabra/simplefbapp.git
+
+        git clone git@github.com:ngkabra/simplefbapp.git
 - All three of the above should be done in some directory which is in your PYTHONPATH. 
 - Create a django project (or take an existing django project), add 'simplefbapp' to your INSTALLED_APPS, and add `simplefbapp.urls` to your urls.py. 
 - Create an FB application by going to [the developers app](http://www.facebook.com/developers/). 
