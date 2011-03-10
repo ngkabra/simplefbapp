@@ -58,11 +58,18 @@ def parse_signed_request(signed_request, secret):
 def process_request(request):
     fbdata = parse_signed_request(request.GET.get('signed_request'),
                                    APP_SECRET)
+    if not fbdata:
+        return (None, None)
+
     if 'oauth_token' in fbdata:
         fbapi = Client(APP_CONSUMER, providers.facebook,
                        access_token=fbdata['oauth_token'])
 
     else:
+        # at this point, we should really re-direct the user to the
+        # app auth page, and set the redirect_uri to the original
+        # url, but that would complicate the code and make it confusing
+        # to newcomers hence not doing it just now.
         fbapi = None
 
     return (fbdata, fbapi)
@@ -74,6 +81,11 @@ def canvas(request):
                                   data=dict(message='No signed_request. Did you forget to turn on OAuth 2.0 in the Advanced Settings for your app?',
                                             APP_CANVAS_PAGE=APP_CANVAS_PAGE),
                                   context_instance=RequestContext(request))
+                                     # Sticking the APP_CANVAS_PAGE in the
+                                     # context is a hack. Normally, you should
+                                     # not do this. But fixing it will make
+                                     # the code more complicated and I don't
+                                     # want to confuse newbies.
     
     fbdata, fbapi = process_request(request)
     if not fbapi:
