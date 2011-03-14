@@ -78,8 +78,8 @@ def canvas(request):
     signed_req = request.GET.get('signed_request')
     if not signed_req:
         return render_to_response('simplefbapp/canvas.html',
-                                  data=dict(message='No signed_request. Did you forget to turn on OAuth 2.0 in the Advanced Settings for your app?',
-                                            APP_CANVAS_PAGE=APP_CANVAS_PAGE),
+                                  dict(message='No signed_request. Did you forget to turn on OAuth 2.0 in the Advanced Settings for your app?',
+                                       APP_CANVAS_PAGE=APP_CANVAS_PAGE),
                                   context_instance=RequestContext(request))
                                      # Sticking the APP_CANVAS_PAGE in the
                                      # context is a hack. Normally, you should
