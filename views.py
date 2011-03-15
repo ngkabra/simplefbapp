@@ -22,6 +22,7 @@ from django.template import RequestContext
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
 
 from simpleoauth import Client, providers
 
@@ -56,7 +57,7 @@ def parse_signed_request(signed_request, secret):
 ### END of https://gist.github.com/495149
 
 def process_request(request):
-    fbdata = parse_signed_request(request.GET.get('signed_request'),
+    fbdata = parse_signed_request(request.REQUEST.get('signed_request'),
                                    APP_SECRET)
     if not fbdata:
         return (None, None)
@@ -74,8 +75,9 @@ def process_request(request):
 
     return (fbdata, fbapi)
 
+@csrf_exempt
 def canvas(request):
-    signed_req = request.GET.get('signed_request')
+    signed_req = request.REQUEST.get('signed_request')
     if not signed_req:
         return render_to_response('simplefbapp/canvas.html',
                                   dict(message='No signed_request. Did you forget to turn on OAuth 2.0 in the Advanced Settings for your app?',
@@ -102,6 +104,7 @@ def canvas(request):
                                    APP_CANVAS_PAGE=APP_CANVAS_PAGE),
                               context_instance=RequestContext(request))
     
+@csrf_exempt
 def news(request):
     fbdata, fbapi = process_request(request)
     news = fbapi.get('me/home')
@@ -110,6 +113,7 @@ def news(request):
                                    APP_CANVAS_PAGE=APP_CANVAS_PAGE),
                               context_instance=RequestContext(request))
 
+@csrf_exempt
 def friends(request):
     fbdata, fbapi = process_request(request)
     friends = fbapi.get('me/friends')
